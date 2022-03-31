@@ -1,0 +1,8 @@
+.arrow-back {
+  position: fixed;
+  top: 30px;
+}
+
+.arrow-back a {
+  color: #000;
+}

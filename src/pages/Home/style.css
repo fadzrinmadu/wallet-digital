@@ -1,0 +1,13 @@
+.home {
+  position: relative;
+}
+
+.home .logout {
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  font-size: 14px;
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+}

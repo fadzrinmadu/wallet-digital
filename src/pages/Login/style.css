@@ -1,0 +1,4 @@
+.form-button a:nth-child(1),
+.form-button button:nth-child(1) {
+  margin-bottom: 16px;
+}

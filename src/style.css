@@ -1,0 +1,33 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  padding: 70px 30px 40px;
+  height: 100vh;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+h1 {
+  margin-bottom: 48px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.wrapper-content {
+  flex-grow: 2;
+}
+
+.wrapper-action {
+  flex-grow: 0.1;
+}
+
+form {
+  height: 100%;
+}

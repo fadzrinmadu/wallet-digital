@@ -1,0 +1,13 @@
+// register response
+{
+    "status": "success",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjQ1MWNiNDk2Mzg0OTI5YTcxNmEwZDMiLCJ1c2VybmFtZSI6InVzZXIxMjMiLCJhY2NvdW50Tm8iOiI1OTcwLTk3MC0xNjg2IiwiaWF0IjoxNjQ4Njk2NTAwLCJleHAiOjE2NDg3MDczMDB9.8kCeZndHGLMTzypuLMSYkxYfq2jaL3UQupzX6jIoajw"
+}
+
+// login response
+{
+    "status": "success",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjQ1MWNiNDk2Mzg0OTI5YTcxNmEwZDMiLCJ1c2VybmFtZSI6InVzZXIxMjMiLCJhY2NvdW50Tm8iOiI1OTcwLTk3MC0xNjg2IiwiaWF0IjoxNjQ4Njk2NzA2LCJleHAiOjE2NDg3MDc1MDZ9.48vsSR2YpgXBFNTgSDcrCqHbSIAjbPUKUmvvuB8W5qg",
+    "username": "user123",
+    "accountNo": "5970-970-1686"
+}

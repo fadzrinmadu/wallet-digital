@@ -1,0 +1,53 @@
+.transaction-history {
+  margin-top: 42px;
+}
+
+.transaction-history h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 14px;
+}
+
+.transaction-history .transaction-card {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #fff;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.transaction-history .transaction-card:last-child {
+  margin-bottom: 80px;
+}
+
+.transaction-history .transaction-date {
+  display: block;
+  color: #959595;
+  margin-bottom: 10px;
+}
+
+.transaction-history .transaction-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.transaction-history .transaction-item .transaction-data {
+  margin-bottom: 10px;
+}
+
+.transaction-history .transaction-item .account-number {
+  color: #959595;
+}
+
+.transaction-history .transaction-item .transaction-total {
+  color: #959595;
+}
+
+.transaction-history .transaction-item .transaction-total.plus {
+  color: #08C73B;
+}

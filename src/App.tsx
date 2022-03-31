@@ -1,25 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './style.css';
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+} from "react-router-dom";
+import { CookiesProvider } from 'react-cookie';
+
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Home from './pages/Home';
+import Transfer from './pages/Transfer';
+import ProtectedRoute from './components/ProtectedRoute';
+import UnprotectedRoute from './components/UnprotectedRoute';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <CookiesProvider>
+      <BrowserRouter>
+        <Switch>
+          <UnprotectedRoute exact path="/">
+            <Login />
+          </UnprotectedRoute>
+          <UnprotectedRoute path="/register">
+            <Register />
+          </UnprotectedRoute>
+
+          <ProtectedRoute path="/home">
+            <Home props='' />
+          </ProtectedRoute>
+          <ProtectedRoute path="/transfer">
+            <Transfer />
+          </ProtectedRoute>
+        </Switch>
+      </BrowserRouter>
+    </CookiesProvider>
   );
 }
 

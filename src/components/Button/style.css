@@ -1,0 +1,27 @@
+.button {
+  display: block;
+  width: 100%;
+  height: 50px;
+  border-radius: 50px;
+  border: 0;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  line-height: 50px;
+}
+
+.mb-40 {
+  margin-bottom: 40px;
+}
+
+.button-primary {
+  color: #fff;
+  background-color: #000;
+}
+
+.button-secondary {
+  color: #000;
+  background-color: #fff;
+  border: 2px solid #000;
+}
