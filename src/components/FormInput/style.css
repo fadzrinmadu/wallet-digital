@@ -19,3 +19,24 @@
   border: 2px solid #000;
   font-weight: bold;
 }
+
+.form-input .error-message {
+  display: none;
+  color: #ff1c1c;
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+.form-input.is-invalid label {
+  color: #ff1c1c;
+}
+
+.form-input.is-invalid input {
+  border: 2px solid #ff1c1c;
+}
+
+.form-input.is-invalid .error-message {
+  display: block;
+}
+
+

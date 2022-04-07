@@ -22,6 +22,7 @@ export default function FormSelect(props: FormSelectProps) {
       <label htmlFor={field}>{text}</label>
       <div className="custom-select">
         <select id={field} value={value} onChange={onChange}>
+          <option>-- Select Payee --</option>
           {data.length && data.map((item: DataFormSelectType) => (
             <option key={item.id} value={item.accountNo}>{item.name}</option>
           ))}

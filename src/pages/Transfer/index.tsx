@@ -25,9 +25,6 @@ export default function Transfer() {
     try {
       const result = await postTransfer(cookies.token, transfer);
 
-      console.log(transfer);
-      debugger;
-
       if (result.status === 'success') {
         history.push('/home');
       } else {

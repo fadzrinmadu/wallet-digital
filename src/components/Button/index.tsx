@@ -8,13 +8,14 @@ type ButtonProps = {
   isButtonHome?: boolean
   type?: ButtonType
   href?: string
+  isDisabled?: boolean;
   onClick?: () => void
 }
 
 type ButtonType = 'link' | 'button';
 
 export default function Button({
-  text, isSecondary, isButtonHome, type, href = '', onClick,
+  text, isSecondary, isButtonHome, type, href = '', isDisabled, onClick,
 }: ButtonProps) {
   let classname = `button ${!isSecondary ? 'button-primary' : 'button-secondary'}`;
 
@@ -31,7 +32,7 @@ export default function Button({
   }
 
   return (
-    <button type="button" className={classname} onClick={onClick}>
+    <button type="button" className={classname} onClick={onClick} disabled={isDisabled}>
       {text}
     </button>
   );

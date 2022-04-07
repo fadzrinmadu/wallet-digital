@@ -10,6 +10,8 @@ import FormInput from '../../components/FormInput';
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [usernameErrorMessage, setUsernameErrorMessage] = useState('');
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
 
   const [, setCookies] = useCookies(['token']);
   const history = useHistory();
@@ -47,19 +49,37 @@ export default function Login() {
                 <FormInput
                   text="Username"
                   field="username"
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => setUsername(event?.target.value)}
+                  errorMessage={usernameErrorMessage}
+                  onChange={
+                    (event: React.ChangeEvent<HTMLInputElement>) =>
+                      validateInputForm({
+                        value: event.target.value,
+                        type: 'username',
+                        fnSetState: (value) => setUsername(value),
+                        fnSetErrorMessage: (value) => setUsernameErrorMessage(value),
+                      })
+                  }
                 />
                 <FormInput
                   text="Password"
                   field="password"
                   type="password"
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => setPassword(event?.target.value)}
+                  errorMessage={passwordErrorMessage}
+                  onChange={
+                    (event: React.ChangeEvent<HTMLInputElement>) =>
+                      validateInputForm({
+                        value: event.target.value,
+                        type: 'password',
+                        fnSetState: (value) => setPassword(value),
+                        fnSetErrorMessage: (value) => setPasswordErrorMessage(value),
+                      })
+                  }
                 />
               </div>
             </div>
             <div className="wrapper-action">
               <div className="form-button">
-                <Button text="login" onClick={actionLogin} />
+                <Button text="login" onClick={actionLogin} isDisabled={!(username && password)} />
                 <Button text="register" type="link" href="/register" isSecondary />
               </div>
             </div>
@@ -68,4 +88,34 @@ export default function Login() {
       </div>
     </div>
   );
+}
+
+interface ValidateInputFormParams {
+  value: string;
+  type: 'username' | 'password';
+  fnSetState: (value: string) => void;
+  fnSetErrorMessage: (text: string) => void;
+}
+
+function validateInputForm({ value, type, fnSetState, fnSetErrorMessage }: ValidateInputFormParams) {
+  switch (type) {
+    case 'username':
+      if (value === '') {
+        fnSetErrorMessage('Username cannot be empty');
+      } else {
+        fnSetErrorMessage('');
+      }
+
+      fnSetState(value);
+      break;
+    case 'password':
+      if (value === '') {
+        fnSetErrorMessage('Password cannot be empty');
+      } else {
+        fnSetErrorMessage('');
+      }
+
+      fnSetState(value);
+      break;
+  }
 }

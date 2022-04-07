@@ -25,3 +25,7 @@
   background-color: #fff;
   border: 2px solid #000;
 }
+
+.button:disabled {
+  background-color: rgb(182, 182, 182);
+}

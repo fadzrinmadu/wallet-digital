@@ -1,0 +1,12 @@
+// TODO
+- Menambahkan validasi pada form
+- Menampilkan pesan error ketika request api
+- Menerapkan typescript pada semua props dan state pada component react
+- Membuat re-usable component untuk layout
+- Refactor kode program
+- Menerapkan unit testing
+- Membuat dokumentasi di file README.md
+
+
+// BUGS
+- Fix bug ketika data payee tidak diubah
