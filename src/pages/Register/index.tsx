@@ -8,6 +8,7 @@ import FormInput from '../../components/FormInput';
 import Button from '../../components/Button';
 import ArrowBack from '../../components/ArrowBack';
 import { validateInputForm } from '../../utilities';
+import ErrorMessage from '../../components/ErrorMessage';
 
 export default function Register() {
   const [username, setUsername] = useState('');
@@ -16,29 +17,26 @@ export default function Register() {
   const [usernameErrorMessage, setUsernameErrorMessage] = useState('');
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
   const [passwordConfirmationErrorMessage, setPasswordConfirmationErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const [, setCookies] = useCookies(['token']);
   const history = useHistory();
 
   const actionRegister = async () => {
-    try {
-      const data = { username, password };
-      const result = await setRegister(data);
+    const data = { username, password };
+    const result = await setRegister(data);
 
-      if (result.status === 'success') {
-        const today = new Date();
+    if (result.status === 'success') {
+      const today = new Date();
 
-        setCookies('token', result.token, {
-          path: '/',
-          expires: new Date(today.setDate(today.getDate() + 1)),
-        });
+      setCookies('token', result.token, {
+        path: '/',
+        expires: new Date(today.setDate(today.getDate() + 1)),
+      });
 
-        history.push('/home');
-      } else {
-        throw new Error(result.error);
-      }
-    } catch (error) {
-      console.log(error);
+      history.push('/home');
+    } else {
+      setErrorMessage(result.error);
     }
   };
 
@@ -96,6 +94,9 @@ export default function Register() {
                   }
                 />
               </div>
+              {errorMessage !== '' && (
+                <ErrorMessage type="error" message={errorMessage} />
+              )}
             </div>
             <div className="wrapper-action">
               <div className="form-button">

@@ -24,18 +24,15 @@ export default function Transfer() {
 
   const [payeeErrorMessage, setPayeeErrorMessage] = useState('');
   const [amountErrorMessage, setAmountErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const transferAction = async () => {
-    try {
-      const result = await postTransfer(cookies.token, transfer);
+    const result = await postTransfer(cookies.token, transfer);
 
-      if (result.status === 'success') {
-        history.push('/home');
-      } else {
-        throw new Error(result.error);
-      }
-    } catch (error) {
-      console.log(error);
+    if (result.status === 'success') {
+      history.push('/home');
+    } else {
+      setErrorMessage(result.error);
     }
   };
 
