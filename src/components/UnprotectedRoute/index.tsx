@@ -1,7 +1,14 @@
+import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
-export default function UnprotectedRoute({ children, ...rest }) {
+interface UnProtectedRouteProps {
+  children: React.ReactNode;
+  exact?: boolean;
+  path: string;
+}
+
+export default function UnprotectedRoute({ children, ...rest }: UnProtectedRouteProps) {
   const [cookies] = useCookies(['token']);
 
   return <Route {...rest}>
