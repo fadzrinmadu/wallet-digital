@@ -1,3 +1,13 @@
+export interface RegisterTypes {
+  username: string;
+  password: string;
+}
+
+export interface LoginTypes {
+  username: string;
+  password: string;
+}
+
 export interface SenderTypes {
   accountHolder: string;
   accountNo: string;

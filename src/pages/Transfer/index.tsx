@@ -10,6 +10,7 @@ import { PayeeType, TransferTypes } from '../../services/data-types';
 import { postTransfer } from '../../services/transfer';
 import { useHistory } from 'react-router-dom';
 import { validateInputForm } from '../../utilities';
+import ErrorMessage from '../../components/ErrorMessage';
 
 export default function Transfer() {
   const history = useHistory();
@@ -96,6 +97,9 @@ export default function Transfer() {
                   }
                 />
               </div>
+              {errorMessage !== '' && (
+                <ErrorMessage type="error" message={errorMessage} />
+              )}
             </div>
             <div className="wrapper-action">
               <div className="form-button">

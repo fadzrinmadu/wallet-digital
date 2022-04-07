@@ -1,7 +1,11 @@
 import './style.css';
 import { Link } from 'react-router-dom';
 
-export default function ArrowBack(props: any) {
+interface ArrowBackProps {
+  path: string;
+}
+
+export default function ArrowBack(props: ArrowBackProps) {
   const { path } = props;
 
   return (
