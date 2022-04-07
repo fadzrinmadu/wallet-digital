@@ -45,7 +45,7 @@
 }
 
 .transaction-history .transaction-item .transaction-total {
-  color: #959595;
+  color: #ff1c1c;
 }
 
 .transaction-history .transaction-item .transaction-total.plus {

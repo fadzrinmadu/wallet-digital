@@ -1,10 +1,19 @@
-import React from 'react';
+import { numberFormatter } from '../../utilities';
 
-export default function TransactionItem(props: any) {
-  const { accountName, accountNumber, total } = props;
+interface TransactionItemProps {
+  accountName: string;
+  accountNumber: string;
+  total: number;
+  transactionType: string;
+}
 
-  // check + or -
-  const isPlus = total.split('')[0];
+export default function TransactionItem(props: TransactionItemProps) {
+  const {
+    accountName,
+    accountNumber,
+    total,
+    transactionType,
+  } = props;
 
   return (
     <div className="transaction-item">
@@ -13,7 +22,9 @@ export default function TransactionItem(props: any) {
         <div className="account-number">{accountNumber}</div>
       </div>
       <div>
-        <div className={`transaction-total ${isPlus !== '-' && 'plus'}`}>{total}</div>
+        <div className={`transaction-total ${transactionType === 'received' && 'plus'}`}>
+          {transactionType === 'received' ? numberFormatter(total) : `-${numberFormatter(total)}`}
+        </div>
       </div>
     </div>
   );

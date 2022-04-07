@@ -1,9 +1,5 @@
 import './style.css';
-import {
-  BrowserRouter,
-  Switch,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter, Switch } from "react-router-dom";
 import { CookiesProvider } from 'react-cookie';
 
 import Login from './pages/Login';
@@ -21,13 +17,15 @@ function App() {
           <UnprotectedRoute exact path="/">
             <Login />
           </UnprotectedRoute>
+
           <UnprotectedRoute path="/register">
             <Register />
           </UnprotectedRoute>
 
           <ProtectedRoute path="/home">
-            <Home props='' />
+            <Home />
           </ProtectedRoute>
+
           <ProtectedRoute path="/transfer">
             <Transfer />
           </ProtectedRoute>

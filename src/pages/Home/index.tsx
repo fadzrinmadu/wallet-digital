@@ -1,22 +1,21 @@
 import './style.css';
+
+import { MouseEvent } from 'react';
 import { useCookies } from 'react-cookie';
 import { useHistory } from 'react-router-dom';
-import AccountInformation from '../../components/AccountInformation';
+
 import Button from '../../components/Button';
+import AccountInformation from '../../components/AccountInformation';
 import TransactionsHistory from '../../components/TransactionHistory';
 
-type HomeProps = {
-  props: string
-}
-
-export default function Home({ props }: HomeProps) {
+export default function Home() {
   const [, , removeCookie] = useCookies(['token']);
   const history = useHistory();
 
-  const actionLogout = (event: any) => {
+  const actionLogout = (event: MouseEvent) => {
     event.preventDefault();
     removeCookie('token');
-    return history.push('/');
+    history.push('/');
   };
 
   return (

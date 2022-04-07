@@ -1,13 +1,12 @@
 import './style.css';
-import { useState } from 'react';
+
+import React, { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useHistory } from 'react-router-dom';
-
+import { setRegister } from '../../services/auth';
 import FormInput from '../../components/FormInput';
 import Button from '../../components/Button';
 import ArrowBack from '../../components/ArrowBack';
-
-import { setRegister } from '../../services/auth';
 
 export default function Register() {
   const [username, setUsername] = useState('');
@@ -19,7 +18,6 @@ export default function Register() {
   const actionRegister = async () => {
     try {
       const data = { username, password };
-
       const result = await setRegister(data);
 
       if (result.status === 'success') {
@@ -30,7 +28,7 @@ export default function Register() {
           expires: new Date(today.setDate(today.getDate() + 1)),
         });
 
-        return history.push('/home');
+        history.push('/home');
       } else {
         throw new Error(result.error);
       }
@@ -51,13 +49,13 @@ export default function Register() {
                 <FormInput
                   text="Username"
                   field="username"
-                  onChange={(event: any) => setUsername(event?.target.value)}
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => setUsername(event?.target.value)}
                 />
                 <FormInput
                   text="Password"
                   field="password"
                   type="password"
-                  onChange={(event: any) => setPassword(event?.target.value)}
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => setPassword(event?.target.value)}
                 />
                 <FormInput
                   text="Confirm Password"

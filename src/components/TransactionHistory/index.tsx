@@ -1,42 +1,47 @@
 import './style.css';
-import React from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
+import { getTransactions } from '../../services/transactions';
+import { mapTransactionsByDate } from '../../utilities';
+import { TransactionTypes, TransactionByDateTypes } from '../../services/data-types';
 import TransactionItem from './TransactionItem';
 
 export default function TransactionHistory() {
+  const [transactionsByDate, setTransactionsByDate] = useState<TransactionByDateTypes[]>([]);
+  const [cookies] = useCookies(['token']);
+
+  const getUserTransactions = useCallback(async () => {
+    const result = await getTransactions(cookies.token);
+    const mappedTransactions = mapTransactionsByDate(result.data);
+    setTransactionsByDate(mappedTransactions);
+  }, [cookies.token]);
+
+  useEffect(() => {
+    getUserTransactions();
+  }, [getUserTransactions]);
+
+  console.log(transactionsByDate);
+
   return (
     <div className="transaction-history">
       <h2>You transaction history</h2>
-      <div className="transaction-card">
-        <span className="transaction-date">6 Sep 2021</span>
-        <TransactionItem
-          accountName="Jackie"
-          accountNumber="4992-321-3321"
-          total="1,200.00"
-        />
-        <TransactionItem
-          accountName="Tim Cook"
-          accountNumber="4992-321-3321"
-          total="-310.00"
-        />
-      </div>
-      <div className="transaction-card">
-        <span className="transaction-date">5 Sep 2021</span>
-        <TransactionItem
-          accountName="Jackie"
-          accountNumber="4992-321-3321"
-          total="1,200.00"
-        />
-        <TransactionItem
-          accountName="Tim Cook"
-          accountNumber="4992-321-3321"
-          total="-310.00"
-        />
-        <TransactionItem
-          accountName="Tim Cook"
-          accountNumber="4992-321-3321"
-          total="-20.00"
-        />
-      </div>
+
+      {transactionsByDate.length > 0 && transactionsByDate.map((transactionByDate: TransactionByDateTypes) => {
+        return (
+          <div className="transaction-card" key={transactionByDate.date}>
+            <span className="transaction-date">{transactionByDate.date}</span>
+            {transactionByDate.transactions.map((transaction: TransactionTypes) => (
+              <TransactionItem
+                key={transaction.transactionId}
+                accountName={transaction.transactionType === 'received' ? transaction.sender.accountHolder : transaction.receipient.accountHolder}
+                accountNumber={transaction.transactionType === 'received' ? transaction.sender.accountNo : transaction.receipient.accountNo}
+                transactionType={transaction.transactionType}
+                total={transaction.amount}
+              />
+            ))}
+          </div>
+        );
+      })}
     </div>
   );
 }

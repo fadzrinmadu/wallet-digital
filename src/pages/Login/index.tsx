@@ -1,10 +1,11 @@
 import './style.css';
-import { useState } from 'react';
+
+import React, { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useHistory } from 'react-router-dom';
-import FormInput from '../../components/FormInput';
-import Button from '../../components/Button';
 import { setLogin } from '../../services/auth';
+import Button from '../../components/Button';
+import FormInput from '../../components/FormInput';
 
 export default function Login() {
   const [username, setUsername] = useState('');
@@ -16,7 +17,6 @@ export default function Login() {
   const actionLogin = async () => {
     try {
       const data = { username, password };
-
       const result = await setLogin(data);
 
       if (result.status === 'success') {
@@ -27,7 +27,7 @@ export default function Login() {
           expires: new Date(today.setDate(today.getDate() + 1)),
         });
 
-        return history.push('/home');
+        history.push('/home');
       } else {
         throw new Error(result.error);
       }
@@ -47,22 +47,19 @@ export default function Login() {
                 <FormInput
                   text="Username"
                   field="username"
-                  onChange={(event: any) => setUsername(event?.target.value)}
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => setUsername(event?.target.value)}
                 />
                 <FormInput
                   text="Password"
                   field="password"
                   type="password"
-                  onChange={(event: any) => setPassword(event?.target.value)}
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => setPassword(event?.target.value)}
                 />
               </div>
             </div>
             <div className="wrapper-action">
               <div className="form-button">
-                <Button
-                  text="login"
-                  onClick={actionLogin}
-                />
+                <Button text="login" onClick={actionLogin} />
                 <Button text="register" type="link" href="/register" isSecondary />
               </div>
             </div>
