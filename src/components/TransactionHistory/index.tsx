@@ -20,8 +20,6 @@ export default function TransactionHistory() {
     getUserTransactions();
   }, [getUserTransactions]);
 
-  console.log(transactionsByDate);
-
   return (
     <div className="transaction-history">
       <h2>You transaction history</h2>

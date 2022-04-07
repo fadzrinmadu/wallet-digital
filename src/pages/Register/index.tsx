@@ -7,10 +7,15 @@ import { setRegister } from '../../services/auth';
 import FormInput from '../../components/FormInput';
 import Button from '../../components/Button';
 import ArrowBack from '../../components/ArrowBack';
+import { validateInputForm } from '../../utilities';
 
 export default function Register() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordConfirmation, setPasswordConfirmation] = useState('');
+  const [usernameErrorMessage, setUsernameErrorMessage] = useState('');
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
+  const [passwordConfirmationErrorMessage, setPasswordConfirmationErrorMessage] = useState('');
 
   const [, setCookies] = useCookies(['token']);
   const history = useHistory();
@@ -49,18 +54,46 @@ export default function Register() {
                 <FormInput
                   text="Username"
                   field="username"
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => setUsername(event?.target.value)}
+                  errorMessage={usernameErrorMessage}
+                  onChange={
+                    (event: React.ChangeEvent<HTMLInputElement>) =>
+                      validateInputForm({
+                        value: event.target.value,
+                        type: 'username',
+                        fnSetState: (value: string) => setUsername(value),
+                        fnSetErrorMessage: (value: string) => setUsernameErrorMessage(value),
+                      })
+                  }
                 />
                 <FormInput
                   text="Password"
                   field="password"
                   type="password"
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => setPassword(event?.target.value)}
+                  errorMessage={passwordErrorMessage}
+                  onChange={
+                    (event: React.ChangeEvent<HTMLInputElement>) =>
+                      validateInputForm({
+                        value: event.target.value,
+                        type: 'password',
+                        fnSetState: (value: string) => setPassword(value),
+                        fnSetErrorMessage: (value: string) => setPasswordErrorMessage(value),
+                      })
+                  }
                 />
                 <FormInput
                   text="Confirm Password"
-                  field="password2"
+                  field="passwordConfirmation"
                   type="password"
+                  errorMessage={passwordConfirmationErrorMessage}
+                  onChange={
+                    (event: React.ChangeEvent<HTMLInputElement>) =>
+                      validateInputForm({
+                        value: event.target.value,
+                        type: 'passwordConfirmation',
+                        fnSetState: (value: string) => setPasswordConfirmation(value),
+                        fnSetErrorMessage: (value: string) => setPasswordConfirmationErrorMessage(value),
+                      })
+                  }
                 />
               </div>
             </div>
@@ -69,6 +102,7 @@ export default function Register() {
                 <Button
                   text="register"
                   onClick={actionRegister}
+                  isDisabled={!(username && password && passwordConfirmation)}
                 />
               </div>
             </div>

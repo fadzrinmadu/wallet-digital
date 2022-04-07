@@ -21,3 +21,21 @@
   background-color: #fff;
 }
 
+.form-input .error-message {
+  display: none;
+  color: #ff1c1c;
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+.form-input.is-invalid label {
+  color: #ff1c1c;
+}
+
+.form-input.is-invalid select {
+  border: 2px solid #ff1c1c;
+}
+
+.form-input.is-invalid .error-message {
+  display: block;
+}

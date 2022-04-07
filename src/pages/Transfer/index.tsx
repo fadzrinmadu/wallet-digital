@@ -9,6 +9,7 @@ import { getPayees } from '../../services/payee';
 import { PayeeType, TransferTypes } from '../../services/data-types';
 import { postTransfer } from '../../services/transfer';
 import { useHistory } from 'react-router-dom';
+import { validateInputForm } from '../../utilities';
 
 export default function Transfer() {
   const history = useHistory();
@@ -20,6 +21,9 @@ export default function Transfer() {
     amount: 0,
     description: '',
   });
+
+  const [payeeErrorMessage, setPayeeErrorMessage] = useState('');
+  const [amountErrorMessage, setAmountErrorMessage] = useState('');
 
   const transferAction = async () => {
     try {
@@ -58,9 +62,15 @@ export default function Transfer() {
                   field="payee"
                   data={payees}
                   value={transfer.receipientAccountNo}
+                  errorMessage={payeeErrorMessage}
                   onChange={
                     (event: React.ChangeEvent<HTMLSelectElement>) =>
-                      setTransfer({ ...transfer, receipientAccountNo: event.target.value })
+                      validateInputForm({
+                        value: event.target.value,
+                        type: 'payee',
+                        fnSetState: (value) => setTransfer({ ...transfer, receipientAccountNo: value }),
+                        fnSetErrorMessage: (value) => setPayeeErrorMessage(value),
+                      })
                   }
                 />
                 <FormInput
@@ -68,9 +78,15 @@ export default function Transfer() {
                   field="amount"
                   type="number"
                   defaultValue={transfer.amount}
+                  errorMessage={amountErrorMessage}
                   onChange={
                     (event: React.ChangeEvent<HTMLInputElement>) =>
-                      setTransfer({ ...transfer, amount: +event.target.value })
+                      validateInputForm({
+                        value: event.target.value,
+                        type: 'amount',
+                        fnSetState: (value) => setTransfer({ ...transfer, amount: +value }),
+                        fnSetErrorMessage: (value) => setAmountErrorMessage(value),
+                      })
                   }
                 />
                 <FormArea
@@ -95,3 +111,4 @@ export default function Transfer() {
     </div>
   );
 }
+

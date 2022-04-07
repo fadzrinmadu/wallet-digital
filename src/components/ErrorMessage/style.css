@@ -1,0 +1,26 @@
+.message {
+  width: 100%;
+  height: 50px;
+  box-sizing: border-box;
+  margin: 20px 0;
+  line-height: 50px;
+  font-size: 14px;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.message.message-success {
+  border: 2px solid green;
+}
+
+.message.message-error {
+  color: #FF5A5A;
+  border: 2px solid #FF5A5A;
+  background-color: #FFE3E3;
+}
+
+.message.message-success {
+  color: #00DA8B;
+  border: 1px solid #00DA8B;
+  background-color: #E3FFED;
+}
